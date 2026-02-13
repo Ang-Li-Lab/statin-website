@@ -15,10 +15,8 @@ interface SelectedValues {
 
 interface AppState {
   selectedValues: SelectedValues;
-  currentContainer: string;
   currentTabs: Record<string, string>;
   isInitialized: boolean;
-  setContainer: (container: string) => void;
   setTab: (container: string, tab: string) => void;
   setSelectedValues: (
     category: "risk" | "exclusion",
@@ -45,13 +43,10 @@ export const useAppStore = create<AppState>((set, get) => ({
   hasExclusions: false,
   vteHistoryValue: null,
   acValue: null,
-  currentContainer: "risk",
   currentTabs: {
     risk: "score",
   },
   isInitialized: false,
-
-  setContainer: (container) => set({ currentContainer: container }),
 
   setTab: (container, tab) =>
     set((state) => ({
@@ -155,8 +150,6 @@ export const useAppStore = create<AppState>((set, get) => ({
     const { currentTabs, selectedValues } = get();
     const params = new URLSearchParams();
 
-    params.set("container", container);
-
     Object.entries(currentTabs).forEach(([container, tab]) => {
       params.set(`${container}Tab`, tab);
     });
@@ -196,11 +189,8 @@ export const useAppStore = create<AppState>((set, get) => ({
       exclusion: {},
     };
 
-    const containerParam = searchParams.get("container");
-    const currentContainer = containerParam || "risk";
     const currentTabs: Record<string, string> = {
       risk: searchParams.get("riskTab") || "score",
-      exclusion: searchParams.get("exclusionTab") || "exclusion",
     };
 
     let vteHistoryValue = null;
@@ -267,14 +257,12 @@ export const useAppStore = create<AppState>((set, get) => ({
       hasExclusions,
       vteHistoryValue,
       acValue,
-      currentContainer,
       currentTabs,
       isInitialized: true,
     });
 
     set({
       selectedValues,
-      currentContainer,
       currentTabs,
       isInitialized: true,
     });

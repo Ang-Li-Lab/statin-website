@@ -8,9 +8,7 @@ import { useSearchParams } from "next/navigation";
 
 const MainPage = () => {
   const {
-    currentContainer,
     isInitialized,
-    setContainer,
     initializeStateFromUrl,
     generateShareableLink,
   } = useAppStore();
@@ -28,15 +26,14 @@ const MainPage = () => {
   }, [searchParams, initializeStateFromUrl]);
 
   useEffect(() => {
-    if (isInitialized && currentContainer && !hasAutoScrolled.current) {
+    if (isInitialized && !hasAutoScrolled.current) {
       hasAutoScrolled.current = true;
       const refs: Record<string, React.RefObject<HTMLDivElement | null>> = {
         risk: riskRef,
         exclusion: exclusionRef,
       };
-      refs[currentContainer]?.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [isInitialized, currentContainer]);
+  }, [isInitialized]);
 
   const copyLink = useCallback(() => {
     const shareLink = generateShareableLink("consider");
