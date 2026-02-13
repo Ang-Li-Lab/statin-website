@@ -1,0 +1,19 @@
+{
+    "Header": {
+        "title": "Ayuda para Decisiones",
+        "switchLanguage": "Idioma",
+        "disclaimerLine1": "Esta herramienta está destinada a apoyar la toma de decisiones clínicas y es",
+        "disclaimerLine2": "no es un reemplazo",
+        "disclaimerLine3": "para el consejo, diagnóstico o tratamiento médico profesional"
+    },
+    "RiskContainer": {
+        "mainTitle": "Estratificación del riesgo",
+        "scoreTabTitle": "Puntuación de riesgo",
+        "bleedTabTitle": "Exclusión",
+        "aboutTabTitle": "Acerca de EHR-CAT",
+        "refTabTitle": "Referencias",
+        "unknown": "Desconocido",
+        "no": "No",
+        "yes": "Sí"
+    }
+}

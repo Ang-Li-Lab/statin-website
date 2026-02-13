@@ -1,0 +1,19 @@
+{
+    "Header": {
+        "title": "Decision Aid",
+        "switchLanguage": "Language",
+        "disclaimerLine1": "This tool is intended to support clinical decision making and is",
+        "disclaimerLine2": "not a replacement",
+        "disclaimerLine3": "for professional medical advice, diagnosis, or treatment"
+    },
+    "RiskContainer": {
+        "mainTitle": "Risk Stratification",
+        "scoreTabTitle": "Risk Score",
+        "bleedTabTitle": "Exclusion",
+        "aboutTabTitle": "About EHR-CAT",
+        "refTabTitle": "References",
+        "unknown": "Unknown",
+        "no": "No",
+        "yes": "Yes"
+    }
+}
