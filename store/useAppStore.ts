@@ -204,7 +204,7 @@ export const useAppStore = create<AppState>((set, get) => ({
         );
 
         if (!matchedButton) {
-          matchedButton = score.buttons.find((b) => b.paramValue === "9");
+          matchedButton = score.buttons.find((b) => b.paramValue === "99");
         }
 
         if (matchedButton) {
@@ -227,7 +227,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       );
 
       if (!matchedButton) {
-        matchedButton = criterion.buttons.find((b) => b.paramValue === "9");
+        matchedButton = criterion.buttons.find((b) => b.paramValue === "99");
       }
 
       if (matchedButton) {

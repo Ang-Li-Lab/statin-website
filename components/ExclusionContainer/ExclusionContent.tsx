@@ -37,7 +37,7 @@ const ExclusionContent: React.FC = () => {
 
     if (paramValues.includes("1")) {
       return { text: "Excluded", className: "text-red-500" };
-    } else if (paramValues.includes("9")) {
+    } else if (paramValues.includes("99")) {
       return { text: "Unknown Exclusion", className: "text-gray-500" };
     } else {
       return { text: "Not Excluded", className: "text-black" };
@@ -52,8 +52,8 @@ const ExclusionContent: React.FC = () => {
       <table className="min-w-full table-fixed text-center">
         <thead className="border-b border-gray-200">
           <tr>
-            <th className="w-1/2"></th>
-            <th className="w-1/2 px-4 py-2">
+            <th className="w-3/4"></th>
+            <th className="w-1/4 px-4 py-2">
               <span className={exclusionClass}>{exclusionText}</span>
             </th>
           </tr>

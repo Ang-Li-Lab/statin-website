@@ -26,7 +26,7 @@ export const riskCriteria: Criterion[] = [
     name: "Cancer site/histology",
     scores: {
       khorana: {
-        paramName: "r1",
+        paramName: "rcancerkho",
         buttonsOrientation: "vertical",
         buttons: [
           {
@@ -34,7 +34,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "zero",
@@ -60,7 +60,7 @@ export const riskCriteria: Criterion[] = [
         ],
       },
       ehrcat: {
-        paramName: "r2",
+        paramName: "rcancerehr",
         buttonsOrientation: "vertical",
         buttons: [
           {
@@ -68,7 +68,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "zero",
@@ -107,7 +107,7 @@ export const riskCriteria: Criterion[] = [
     name: "Pretherapy BMI ≥35 kg/m<sup>2</sup>",
     scores: {
       khorana: {
-        paramName: "r3",
+        paramName: "rbmi",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -115,7 +115,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -134,7 +134,7 @@ export const riskCriteria: Criterion[] = [
         ],
       },
       ehrcat: {
-        paramName: "r4",
+        paramName: "rbmi",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -142,7 +142,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -167,7 +167,7 @@ export const riskCriteria: Criterion[] = [
     name: "Pretherapy WBC >11 x 10<sup>9</sup>/L",
     scores: {
       khorana: {
-        paramName: "r5",
+        paramName: "rwbc",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -175,7 +175,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -194,7 +194,7 @@ export const riskCriteria: Criterion[] = [
         ],
       },
       ehrcat: {
-        paramName: "r6",
+        paramName: "rwbc",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -202,7 +202,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -227,7 +227,7 @@ export const riskCriteria: Criterion[] = [
     name: "Pretherapy Hgb &lt;10 g/dL",
     scores: {
       khorana: {
-        paramName: "r7",
+        paramName: "rhgb",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -235,7 +235,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -254,7 +254,7 @@ export const riskCriteria: Criterion[] = [
         ],
       },
       ehrcat: {
-        paramName: "r8",
+        paramName: "rhgb",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -262,7 +262,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -287,7 +287,7 @@ export const riskCriteria: Criterion[] = [
     name: "Pretherapy Plt ≥350 x 10<sup>9</sup>/L",
     scores: {
       khorana: {
-        paramName: "r9",
+        paramName: "rplt",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -295,7 +295,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -314,7 +314,7 @@ export const riskCriteria: Criterion[] = [
         ],
       },
       ehrcat: {
-        paramName: "r10",
+        paramName: "rplt",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -322,7 +322,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -347,7 +347,7 @@ export const riskCriteria: Criterion[] = [
     name: "Advanced cancer stage (IV)",
     scores: {
       ehrcat: {
-        paramName: "r11",
+        paramName: "rstage",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -355,7 +355,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -380,7 +380,7 @@ export const riskCriteria: Criterion[] = [
     name: "History of VTE lifetime",
     scores: {
       ehrcat: {
-        paramName: "r12",
+        paramName: "rvte",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -388,7 +388,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -413,7 +413,7 @@ export const riskCriteria: Criterion[] = [
     name: "History of paralysis/immobility last 12 months",
     scores: {
       ehrcat: {
-        paramName: "r13",
+        paramName: "rparal",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -421,7 +421,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -446,7 +446,7 @@ export const riskCriteria: Criterion[] = [
     name: "Recent/current hospitalization >3 days last 3 months",
     scores: {
       ehrcat: {
-        paramName: "r14",
+        paramName: "rhosp",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -454,7 +454,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -479,7 +479,7 @@ export const riskCriteria: Criterion[] = [
     name: "Endocrine monotherapy (no cytotoxic chemo or checkpoint inhibitor or targeted therapy)",
     scores: {
       ehrcat: {
-        paramName: "r15",
+        paramName: "rendo",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -487,7 +487,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
@@ -512,7 +512,7 @@ export const riskCriteria: Criterion[] = [
     name: "East/South Asian or Pacific Islander",
     scores: {
       ehrcat: {
-        paramName: "r16",
+        paramName: "rasian",
         buttonsOrientation: "horizontal",
         buttons: [
           {
@@ -520,7 +520,7 @@ export const riskCriteria: Criterion[] = [
             name: "Unknown",
             value: 0,
             color: "gray-500",
-            paramValue: "9",
+            paramValue: "99",
           },
           {
             id: "no",
