@@ -15,5 +15,10 @@
         "unknown": "Desconocido",
         "no": "No",
         "yes": "Sí"
+    },
+    "ExclusionContainer": {
+        "unknown": "Desconocido",
+        "no": "No",
+        "yes": "Sí"
     }
 }

@@ -12,7 +12,7 @@ export default function HeaderComp() {
             Statin Clinical Trial
           </p>
           <p className="text-xl leading-tight truncate">
-            {t("title")} <span className="opacity-70">(0.0.2)</span>
+            {t("title")} <span className="opacity-70">(0.0.3)</span>
           </p>
         </div>
 

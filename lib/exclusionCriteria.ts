@@ -15,6 +15,28 @@ export interface Criterion {
 
 export const exclusionCriteria: Criterion[] = [
   {
+    id: "lowscore",
+    name: "Low Khorana and EHR-CAT scores (&lt;2)",
+    buttonsOrientation: "horizontal",
+    paramName: "",
+    buttons: [
+      { id: "unknown", name: "Unknown", color: "gray-500", paramValue: "99" },
+      { id: "no", name: "No", color: "blue-500", paramValue: "0" },
+      { id: "yes", name: "Yes", color: "red-500", paramValue: "1" },
+    ],
+  },
+  {
+    id: "highscore",
+    name: "High Khorana (&gt;4) or EHR-CAT (&gt;5) score",
+    buttonsOrientation: "horizontal",
+    paramName: "",
+    buttons: [
+      { id: "unknown", name: "Unknown", color: "gray-500", paramValue: "99" },
+      { id: "no", name: "No", color: "blue-500", paramValue: "0" },
+      { id: "yes", name: "Yes", color: "red-500", paramValue: "1" },
+    ],
+  },
+  {
     id: "statin",
     name: "Current statin prescription",
     buttonsOrientation: "horizontal",
