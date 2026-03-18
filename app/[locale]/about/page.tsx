@@ -24,16 +24,15 @@ export default function AboutPage({
       </div>
 
       <p>
-        This is the new <strong>Cancer-Associated Venous Thromboembolism (VTE)
-        Decision Aid</strong> website. Development of this Next.js version was
-        started in <strong>September 2024</strong> by <strong>Omid Jafari</strong>.
+        This is the <strong>Statin Clinical Trial Decision Aid</strong> website. Development of this Next.js version was
+        started in <strong>February 2026</strong> by <a className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="https://omidjafari.com" target="_blank" rel="noopener">Omid Jafari</a>.
       </p>
 
-      <h3>About this work</h3>
+      <h3>About the risk scores</h3>
       <p>
         This project is the result of an ongoing collaborative effort to
         conduct patient-centered clinical epidemiology and informatics research
-        using multi-institutional cancer registry–linked electronic health
+        using multi-institutional cancer registry-linked electronic health
         record (EHR) databases. It is co-led by Dr. Ang Li (Baylor College of
         Medicine) and Dr. Nathanael Fillmore (VA Boston Healthcare System and
         Harvard Medical School).
@@ -54,7 +53,7 @@ export default function AboutPage({
         data that are readily extractable from most cancer center EHR systems.
         This added granularity provides a more discriminative risk prediction
         (c-statistic improved from <strong>0.65 → 0.71</strong>) and identifies{" "}
-        <strong>20–30% more patients</strong> with VTE in the high-risk
+        <strong>20-30% more patients</strong> with VTE in the high-risk
         subgroup.
       </p>
 

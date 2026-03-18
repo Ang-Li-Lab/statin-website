@@ -37,6 +37,24 @@ const ExclusionContent: React.FC = () => {
         ? { text: "Unknown Exclusion", className: "text-gray-500" }
         : { text: "Not Excluded", className: "text-black" };
 
+  const getDisplayValue = (criterionId: string) => {
+    if (criterionId === "lowscore") return derivedExclusionValues.lowscore;
+    if (criterionId === "highscore") return derivedExclusionValues.highscore;
+    return selectedValues.exclusion[criterionId];
+  };
+
+  const getValueStyle = (value?: string) => {
+    switch (value) {
+      case "yes":
+        return { text: t("yes"), className: "text-red-500" };
+      case "no":
+        return { text: t("no"), className: "text-blue-500" };
+      case "unknown":
+      default:
+        return { text: t("unknown"), className: "text-gray-500" };
+    }
+  };
+
   return (
     <div>
       <table className="min-w-full table-fixed text-center">
@@ -50,28 +68,32 @@ const ExclusionContent: React.FC = () => {
         </thead>
         <tbody className="divide-y divide-gray-200">
           {localizedCriteria.map((criterion) => {
-            const selectedButtonId =
-              criterion.id === "lowscore"
-                ? derivedExclusionValues.lowscore
-                : criterion.id === "highscore"
-                  ? derivedExclusionValues.highscore
-                  : selectedValues.exclusion[criterion.id];
+            const selectedButtonId = getDisplayValue(criterion.id);
+            const isTextOnly =
+              criterion.id === "lowscore" || criterion.id === "highscore";
+            const valueStyle = getValueStyle(selectedButtonId);
 
             return (
               <tr key={criterion.id}>
                 <td
-                  className="w-1/2 py-2 text-left align-middle"
+                  className="w-3/4 py-2 text-left align-middle"
                   dangerouslySetInnerHTML={{ __html: criterion.name }}
                 />
-                <td className="w-1/2 px-4 py-2 align-top">
-                  <ButtonGroup
+                <td className="w-1/4 px-4 py-2 align-middle">
+                  {isTextOnly ? (
+                    <span className={valueStyle.className}>
+                      {valueStyle.text}
+                    </span>
+                  ) : (
+                    <ButtonGroup
                     criterionId={criterion.id}
                     buttons={criterion.buttons}
                     buttonsOrientation={criterion.buttonsOrientation}
                     selectedButtonId={selectedButtonId}
                     onButtonClick={handleButtonClick}
                     showValues={true}
-                  />
+                    />
+                  )}
                 </td>
               </tr>
             );

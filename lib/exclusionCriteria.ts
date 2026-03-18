@@ -16,7 +16,7 @@ export interface Criterion {
 export const exclusionCriteria: Criterion[] = [
   {
     id: "lowscore",
-    name: "Low Khorana and EHR-CAT scores (&lt;2)",
+    name: "Low Khorana and EHR-CAT scores (&lt;2) - Derived from above",
     buttonsOrientation: "horizontal",
     paramName: "",
     buttons: [
@@ -27,7 +27,7 @@ export const exclusionCriteria: Criterion[] = [
   },
   {
     id: "highscore",
-    name: "High Khorana (&gt;4) or EHR-CAT (&gt;5) score",
+    name: "High Khorana (&gt;4) or EHR-CAT (&gt;5) score - Derived from above",
     buttonsOrientation: "horizontal",
     paramName: "",
     buttons: [

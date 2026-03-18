@@ -18,6 +18,11 @@ interface DerivedExclusionValues {
   highscore: string;
 }
 
+interface ScoreRange {
+  min: number;
+  max: number;
+}
+
 interface AppState {
   selectedValues: SelectedValues;
   currentTabs: Record<string, string>;
@@ -34,6 +39,9 @@ interface AppState {
   computedScores: {
     [scoreName: string]: number;
   };
+  computedScoreRanges: {
+    [scoreName: string]: ScoreRange;
+  };
   derivedExclusionValues: DerivedExclusionValues;
   exclusionStatus: "yes" | "no" | "unknown";
   vteHistoryValue: string | null;
@@ -46,6 +54,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     exclusion: {},
   },
   computedScores: {},
+  computedScoreRanges: {},
   derivedExclusionValues: {
     lowscore: "unknown",
     highscore: "unknown",
@@ -77,6 +86,7 @@ export const useAppStore = create<AppState>((set, get) => ({
         if (!newSelectedValues.risk[scoreName]) {
           newSelectedValues.risk[scoreName] = {};
         }
+
         newSelectedValues.risk[scoreName] = {
           ...newSelectedValues.risk[scoreName],
           [criterionId]: buttonId,
@@ -101,6 +111,7 @@ export const useAppStore = create<AppState>((set, get) => ({
               if (!newSelectedValues.risk[otherScore]) {
                 newSelectedValues.risk[otherScore] = {};
               }
+
               newSelectedValues.risk[otherScore] = {
                 ...newSelectedValues.risk[otherScore],
                 [criterionId]: buttonId,
@@ -119,6 +130,16 @@ export const useAppStore = create<AppState>((set, get) => ({
           "ehrcat",
         );
 
+        const khoranaRange = computeScoreRange(
+          newSelectedValues.risk["khorana"] || {},
+          "khorana",
+        );
+
+        const ehrcatRange = computeScoreRange(
+          newSelectedValues.risk["ehrcat"] || {},
+          "ehrcat",
+        );
+
         let vteHistoryValue = state.vteHistoryValue;
         if (criterionId === "vte_history") {
           vteHistoryValue = getButtonParamValue(
@@ -129,21 +150,9 @@ export const useAppStore = create<AppState>((set, get) => ({
           );
         }
 
-        const khoranaUnknown = isScoreUnknown(
-          newSelectedValues.risk["khorana"],
-          "khorana",
-        );
-
-        const ehrcatUnknown = isScoreUnknown(
-          newSelectedValues.risk["ehrcat"],
-          "ehrcat",
-        );
-
         const derivedExclusionValues = getDerivedScoreExclusions({
-          khorana: totalKhorana,
-          ehrcat: totalEhrcat,
-          khoranaUnknown,
-          ehrcatUnknown,
+          khoranaRange,
+          ehrcatRange,
           isNA: vteHistoryValue === "1" && state.acValue === "1",
         });
 
@@ -158,6 +167,11 @@ export const useAppStore = create<AppState>((set, get) => ({
             ...state.computedScores,
             khorana: totalKhorana,
             ehrcat: totalEhrcat,
+          },
+          computedScoreRanges: {
+            ...state.computedScoreRanges,
+            khorana: khoranaRange,
+            ehrcat: ehrcatRange,
           },
           vteHistoryValue,
           derivedExclusionValues,
@@ -182,10 +196,8 @@ export const useAppStore = create<AppState>((set, get) => ({
         }
 
         const derivedExclusionValues = getDerivedScoreExclusions({
-          khorana: state.computedScores["khorana"],
-          ehrcat: state.computedScores["ehrcat"],
-          khoranaUnknown: isScoreUnknown(state.selectedValues.risk["khorana"], "khorana"),
-          ehrcatUnknown: isScoreUnknown(state.selectedValues.risk["ehrcat"], "ehrcat"),
+          khoranaRange: state.computedScoreRanges["khorana"],
+          ehrcatRange: state.computedScoreRanges["ehrcat"],
           isNA: state.vteHistoryValue === "1" && acValue === "1",
         });
 
@@ -272,6 +284,7 @@ export const useAppStore = create<AppState>((set, get) => ({
           if (!selectedValues.risk[scoreName]) {
             selectedValues.risk[scoreName] = {};
           }
+
           selectedValues.risk[scoreName][criterion.id] = matchedButton.id;
 
           if (criterion.id === "vte_history") {
@@ -303,18 +316,23 @@ export const useAppStore = create<AppState>((set, get) => ({
     });
 
     const computedScores: { [scoreName: string]: number } = {};
+    const computedScoreRanges: { [scoreName: string]: ScoreRange } = {};
+
     Object.keys(selectedValues.risk).forEach((scoreName) => {
       computedScores[scoreName] = computeForScore(
+        selectedValues.risk[scoreName],
+        scoreName,
+      );
+
+      computedScoreRanges[scoreName] = computeScoreRange(
         selectedValues.risk[scoreName],
         scoreName,
       );
     });
 
     const derivedExclusionValues = getDerivedScoreExclusions({
-      khorana: computedScores["khorana"],
-      ehrcat: computedScores["ehrcat"],
-      khoranaUnknown: isScoreUnknown(selectedValues.risk["khorana"], "khorana"),
-      ehrcatUnknown: isScoreUnknown(selectedValues.risk["ehrcat"], "ehrcat"),
+      khoranaRange: computedScoreRanges["khorana"],
+      ehrcatRange: computedScoreRanges["ehrcat"],
       isNA: vteHistoryValue === "1" && acValue === "1",
     });
 
@@ -326,6 +344,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({
       selectedValues,
       computedScores,
+      computedScoreRanges,
       derivedExclusionValues,
       exclusionStatus,
       vteHistoryValue,
@@ -340,67 +359,92 @@ const computeForScore = (
   selectedCriteria: { [criterionId: string]: string },
   scoreName: string,
 ): number => {
-  const rawScore = riskCriteria.reduce((total, criterion) => {
+  return riskCriteria.reduce((total, criterion) => {
     const criterionScore = criterion.scores[scoreName];
-    if (criterionScore) {
-      const selectedButtonId = selectedCriteria[criterion.id];
-      const selectedButton = criterionScore.buttons.find(
-        (b) => b.id === selectedButtonId,
-      );
-      return total + (selectedButton?.value || 0);
-    }
-    return total;
-  }, 0);
-
-  return rawScore;
-};
-
-const getDerivedScoreExclusions = ({
-  khorana,
-  ehrcat,
-  khoranaUnknown,
-  ehrcatUnknown,
-  isNA,
-}: {
-  khorana: number | undefined;
-  ehrcat: number | undefined;
-  khoranaUnknown: boolean;
-  ehrcatUnknown: boolean;
-  isNA: boolean;
-}): DerivedExclusionValues => {
-  if (isNA || khoranaUnknown || ehrcatUnknown) {
-    return { lowscore: "unknown", highscore: "unknown" };
-  }
-
-  if (typeof khorana !== "number" || typeof ehrcat !== "number") {
-    return { lowscore: "unknown", highscore: "unknown" };
-  }
-
-  return {
-    lowscore: khorana < 2 && ehrcat < 2 ? "yes" : "no",
-    highscore: khorana > 4 || ehrcat > 5 ? "yes" : "no",
-  };
-};
-
-const isScoreUnknown = (
-  selectedCriteria: { [criterionId: string]: string } | undefined,
-  scoreName: string,
-): boolean => {
-  if (!selectedCriteria) return true;
-
-  return riskCriteria.some((criterion) => {
-    const criterionScore = criterion.scores[scoreName];
-    if (!criterionScore) return false;
+    if (!criterionScore) return total;
 
     const selectedButtonId = selectedCriteria[criterion.id];
-    if (!selectedButtonId) return true;
-
     const selectedButton = criterionScore.buttons.find(
       (b) => b.id === selectedButtonId,
     );
 
-    return selectedButton?.paramValue === "99";
+    return total + (selectedButton?.value || 0);
+  }, 0);
+};
+
+const computeScoreRange = (
+  selectedCriteria: { [criterionId: string]: string } | undefined,
+  scoreName: string,
+): ScoreRange => {
+  let min = 0;
+  let max = 0;
+
+  riskCriteria.forEach((criterion) => {
+    const criterionScore = criterion.scores[scoreName];
+    if (!criterionScore) return;
+
+    const selectedButtonId = selectedCriteria?.[criterion.id];
+    const selectedButton = criterionScore.buttons.find(
+      (b) => b.id === selectedButtonId,
+    );
+
+    const isUnknownSelection =
+      !selectedButton || selectedButton.paramValue === "99";
+
+    if (!isUnknownSelection) {
+      const value = selectedButton.value || 0;
+      min += value;
+      max += value;
+      return;
+    }
+
+    const knownButtons = criterionScore.buttons.filter(
+      (b) => b.paramValue !== "99",
+    );
+
+    if (knownButtons.length === 0) {
+      const fallbackValue = selectedButton?.value || 0;
+      min += fallbackValue;
+      max += fallbackValue;
+      return;
+    }
+
+    const knownValues = knownButtons.map((b) => b.value || 0);
+    min += Math.min(...knownValues);
+    max += Math.max(...knownValues);
   });
+
+  return { min, max };
+};
+
+const getDerivedScoreExclusions = ({
+  khoranaRange,
+  ehrcatRange,
+  isNA,
+}: {
+  khoranaRange: ScoreRange | undefined;
+  ehrcatRange: ScoreRange | undefined;
+  isNA: boolean;
+}): DerivedExclusionValues => {
+  if (isNA || !khoranaRange || !ehrcatRange) {
+    return { lowscore: "unknown", highscore: "unknown" };
+  }
+
+  const lowscore =
+    khoranaRange.max < 2 && ehrcatRange.max < 2
+      ? "yes"
+      : khoranaRange.min >= 2 || ehrcatRange.min >= 2
+        ? "no"
+        : "unknown";
+
+  const highscore =
+    khoranaRange.min > 4 || ehrcatRange.min > 5
+      ? "yes"
+      : khoranaRange.max <= 4 && ehrcatRange.max <= 5
+        ? "no"
+        : "unknown";
+
+  return { lowscore, highscore };
 };
 
 const getExclusionStatus = (
@@ -410,7 +454,7 @@ const getExclusionStatus = (
   let hasUnknown = false;
 
   for (const criterion of exclusionCriteria) {
-    if (!criterion.paramName) continue; // skip derived rows here
+    if (!criterion.paramName) continue;
 
     const selectedButtonId = exclusionSelections[criterion.id];
     const selectedButton = criterion.buttons.find((b) => b.id === selectedButtonId);

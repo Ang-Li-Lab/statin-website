@@ -19,7 +19,7 @@ export default function FooterComp() {
 
           <div className="order-last md:order-none">
             <p>
-              © 2025 Copyright:{" "}
+              © 2026 Copyright:{" "}
               <a
                 href="https://angli-lab.com/"
                 target="_blank"
