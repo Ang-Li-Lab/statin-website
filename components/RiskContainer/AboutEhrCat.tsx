@@ -124,17 +124,40 @@ const AboutEhrCat: React.FC = () => {
 
       <details className="not-prose rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900/40">
         <summary className="cursor-pointer font-semibold">
-          Reference 1: Chemo and ICI drugs (as of 8/2025)
+          Reference 1: Systemic therapy drugs (as of 8/2025)
         </summary>
         <ul className="mt-2 space-y-2 text-sm break-words">
           <li>
             <span className="font-semibold">Chemo: </span>
-            altretamine, amsacrine, asparaginase, azacitidine, bendamustine, bleomycin, busulfan, cabazitaxel, calaspargase, capecitabine, carboplatin,
-            carmustine, chlorambucil, cisplatin, cladribine, clofarabine, cyclophosphamide, cytarabine, dacarbazine, dactinomycin, daunorubicin, decitabine,
-            docetaxel, doxorubicin, epirubicin, eribulin, etoposide, fotemustine, floxuridine, fludarabine, fluorouracil, gemcitabine, hydroxyurea, idarubicin, ifosfamide,
+            altretamine, amsacrine, asparaginase, azacitidine, bendamustine, bleomycin, busulfan, cabazitaxel, calaspargase, capecitabine, carboplatin, carmustine,
+            chlorambucil, cisplatin, cladribine, clofarabine, cyclophosphamide, cytarabine, dacarbazine, dactinomycin, daunorubicin, decitabine, docetaxel,
+            doxorubicin, epirubicin, eribulin, etoposide, fotemustine, floxuridine, fludarabine, fluorouracil, gemcitabine, hydroxyurea, idarubicin, ifosfamide,
             irinotecan, ixabepilone, lomustine, lurbinectedin, mechlorethamine, melphalan, mercaptopurine, methotrexate, mitomycin, mitoxantrone, nelarabine,
-            omacetaxine, oxaliplatin, paclitaxel, pegaspargase, pemetrexed, pentostatin, plicamycin, porfimer, pralatrexate, procarbazine, raltitrexed, streptozocin, tegafur, temozolomide,
-            teniposide, thioguanine, thiotepa, topotecan, trabectedin, trifluridine, treosulfan, uracil, valrubicin, vinblastine, vincristine, vindesine, vinflunine, vinorelbine
+            omacetaxine, oxaliplatin, paclitaxel, pegaspargase, pemetrexed, pentostatin, plicamycin, porfimer, pralatrexate, procarbazine, raltitrexed, streptozocin,
+            tegafur, temozolomide, teniposide, thioguanine, thiotepa, topotecan, trabectedin, trifluridine, treosulfan, uracil, valrubicin, vinblastine, vincristine,
+            vindesine, vinflunine, vinorelbine
+          </li>
+          <li>
+            <span className="font-semibold">Endo: </span>
+            abarelix, abiraterone, aminoglutethimide, anastrozole, apalutamide, bicalutamide, buserelin, cyproterone, darolutamide, degarelix, enzalutamide, estramustine,
+            exemestane, flutamide, fulvestrant, goserelin, histrelin, letrozole, leuprolide, mitotane, nilutamide, relugolix, tamoxifen, testolactone, toremifene, triptorelin
+          </li>
+          <li>
+            <span className="font-semibold">Target: </span>
+            abemaciclib, acalabrutinib, adagrasib, afatinib, aflibercept, alectinib, alemtuzumab, alpelisib, amivantamab, arsenic, asciminib, avapritinib, avutometinib,
+            axitinib, belantamab, belinostat, belzutifan, bevacizumab, bexarotene, binimetinib, blinatumomab, bortezomib, bosutinib, brentuximab, brigatinib, cabozantinib,
+            capivasertib, capmatinib, carfilzomib, ceritinib, cetuximab, cobimetinib, copanlisib, crizotinib, dabrafenib, dacomitinib, daratumumab, dasatinib, defactinib,
+            demcizumab, dostarlimab, datopotamab, dinutuximab, duvelisib, eflornithine, elacestrant, elotuzumab, elranatamab, enasidenib, encorafenib, enfortumab, ensartinib,
+            entrectinib, epcoritamab, erdafitinib, erlotinib, everolimus, fedratinib, fruquintinib, futibatinib, gefitinib, gemtuzumab, gilteritinib, glasdegib, ibrutinib,
+            ibritumomab, idelalisib, imatinib, imetelstat, inavolisib, infigratinib, inotuzumab, isatuximab, ivosidenib, ixazomib, lapatinib, larotrectinib, lenalidomide,
+            lenvatinib, loncastuximab, lorlatinib, margetuximab, midostaurin, mirdametinib, mirvetuximab, mobocertinib, mogamulizumab, momelotinib, mosunetuzumab, moxetumomab,
+            naxitamab, necitumumab, neratinib, nilotinib, niraparib, nirogacestat, obinutuzumab, ofatumumab, olaparib, olaratumab, olutasidenib, osimertinib, pacritinib,
+            palbociclib, pamrevlumab, panitumumab, panobinostat, pazopanib, pemigatinib, pertuzumab, pexidartinib, pimitespib, pirtobrutinib, plitidepsin, polatuzumab,
+            pomalidomide, ponatinib, pralsetinib, quizartinib, ramucirumab, regorafenib, revumenib, ribociclib, ripretinib, rituximab, romidepsin, rucaparib, ruxolitinib,
+            sacituzumab, selinexor, selpercatinib, selumetinib, siltuximab, sonidegib, sorafenib, sotorasib, sunitinib, tafasitamab, tagraxofusp, talazoparib, talquetamab,
+            tazemetostat, tebentafusp, teclistamab, telisotuzumab, telotristat, temsirolimus, tepotinib, thalidomide, tisotumab, tivozanib, tositumomab, tovorafenib,
+            trametinib, trastuzumab, tremelimumab, tretinoin, tucatinib, umbralisib, upifitamab, vandetanib, veliparib, vemurafenib, venetoclax, vimseltinib, vismodegib,
+            vorinostat, zanubrutinib, glofitamab, lazertinib, repotrectinib, tarlatamab, vorasidenib, zanidatamab, zenocutuzumab, zolbetuximab
           </li>
           <li>
             <span className="font-semibold">ICI: </span>
